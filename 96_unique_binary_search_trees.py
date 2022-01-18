@@ -3,19 +3,17 @@
 
 class Solution:
     def numTrees(self, n: int) -> int:
-        dp = dict()
+        dp = [0] * (n+1)
         dp[0] = 1
         dp[1] = 1
-        dp[2] = 2
         
-        for i in range(3, n+1):
+        for i in range(2, n+1):
             loop = i // 2
             odd = i % 2 == 1
             count = 0
             for j in range(0, loop):
-                count += 2 * (dp[j] * dp[i-1-j])
+                dp[i] += 2 * (dp[j] * dp[i-1-j])
             if odd:
-                count += dp[loop] * dp[loop]
-            dp[i] = count
+                dp[i] += dp[loop] * dp[loop]
         
         return dp[n]
