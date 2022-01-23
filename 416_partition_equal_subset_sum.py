@@ -2,10 +2,13 @@
 # find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.
 
 # Brutal force
+from functools import cache
+
 class Solution:
     def canPartition(self, nums):
         self.ans = False
         
+        @cache
         def devide(i, left, right):
             if self.ans:
                 return
