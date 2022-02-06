@@ -7,6 +7,45 @@ class ListNode:
         self.val = val
         self.next = next
 
+class Solution:
+    def merge2Lists(self, l1, l2):
+        head = ListNode()
+        p = head
+        while l1 and l2:
+            if l1.val <= l2.val:
+                p.next = l1
+                while l1 and l1.val <= l2.val:
+                    p = l1
+                    l1 = l1.next
+            else:
+                p.next = l2
+                while l2 and l2.val <= l1.val:
+                    p = l2
+                    l2 = l2.next
+                
+        if not l1 and not l2:
+            pass
+        elif l1:
+            p.next = l1
+        elif l2:
+            p.next = l2
+        
+        return head.next
+        
+    def mergeKLists(self, lists):
+        if len(lists) == 0:
+            return None
+        if len(lists) == 1:
+            return lists[0]
+        ls = []
+        for i in range(1, len(lists), 2):
+            merged = self.merge2Lists(lists[i-1], lists[i])
+            ls.append(merged)
+        if len(lists) % 2 == 1:
+            ls.append(lists[-1])
+        result = self.mergeKLists(ls)
+        return result
+
 class Solution_0(object):
     def mergeKLists(self, lists):
         """
