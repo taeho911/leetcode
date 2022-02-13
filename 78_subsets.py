@@ -8,3 +8,10 @@ class Solution:
             for ls in memo.copy():
                 memo.append(ls + [n])
         return memo
+
+class Solution_0:
+    def subsets(self, nums: list[int]) -> list[list[int]]:
+        subset =[[]]
+        for num in nums:
+            subset += [item+[num] for item in subset]
+        return subset
