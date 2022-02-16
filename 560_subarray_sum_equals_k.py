@@ -22,3 +22,17 @@ class Solution:
                 count += dic.get(sum - k)
             dic[sum] = dic.get(sum, 0) + 1
         return count
+
+class Solution_0:
+    def subarraySum(self, nums: list[int], k: int) -> int:
+        ans = 0
+        total = 0
+        m = defaultdict(int)
+        m[0] += 1
+        for n in nums:
+            total += n
+            diff = total - k
+            if diff in m:
+                ans += m[diff]
+            m[total] += 1
+        return ans
